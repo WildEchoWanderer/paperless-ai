@@ -589,8 +589,18 @@
                                             </label>
                                         </div>
                                     </div>
+
+                                    <div class="space-y-2">
+                                        <label for="autoProcessingTimeWindow" class="text-sm font-medium">Auto Processing Time Window</label>
+                                        <input type="text" 
+                                            id="autoProcessingTimeWindow" 
+                                            name="autoProcessingTimeWindow"
+                                            value="<%= config.AUTO_PROCESSING_TIME_WINDOW %>"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                            placeholder="e.g., 01:00-03:00">
+                                        <p class="text-sm text-gray-500">Specify the time window for automatic processing (e.g., 01:00-03:00). This only works when automatic processing is disabled</p>
+                                    </div>
                                 </div>
-                                
                                 <hr class="my-6"/>
                                 <!-- Limit Functions Section -->
                                 <section class="space-y-6">

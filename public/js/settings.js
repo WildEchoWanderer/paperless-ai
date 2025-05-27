@@ -40,6 +40,7 @@ class FormManager {
         this.systemPrompt = document.getElementById('systemPrompt');
         this.systemPromptBtn = document.getElementById('systemPromptBtn');
         this.disableAutomaticProcessing = document.getElementById('disableAutomaticProcessing');
+        this.autoProcessingTimeWindow = document.getElementById('autoProcessingTimeWindow');
         this.initialize();
     }
 
@@ -57,6 +58,7 @@ class FormManager {
         this.disableAutomaticProcessing.addEventListener('change', () => this.handleDisableAutomaticProcessing());
         
         this.initializePasswordToggles();
+        this.validateAutoProcessingTimeWindow();
 
         if (this.usePromptTags.value === 'yes') {
             this.disablePromptElements();
@@ -82,6 +84,21 @@ class FormManager {
         } else {
             this.responseTokens.setCustomValidity('');
         }
+    }
+
+    validateAutoProcessingTimeWindow() {
+        if (!this.autoProcessingTimeWindow) return;
+
+        this.autoProcessingTimeWindow.addEventListener('input', (e) => {
+            const value = e.target.value;
+            const pattern = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]-([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
+            
+            if (value && !pattern.test(value)) {
+                this.autoProcessingTimeWindow.setCustomValidity('Please use format HH:MM-HH:MM (e.g. 23:00-05:00)');
+            } else {
+                this.autoProcessingTimeWindow.setCustomValidity('');
+            }
+        });
     }
 
     handleDisableAutomaticProcessing() {

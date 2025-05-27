@@ -1830,67 +1830,67 @@
                 }
               }
             }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Documents successfully reset",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "example": true
+          },
+          "responses": {
+            "200": {
+              "description": "Documents successfully reset",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean",
+                        "example": true
+                      }
                     }
                   }
                 }
               }
-            }
-          },
-          "400": {
-            "description": "Invalid request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string",
-                      "example": "Invalid document IDs"
+            },
+            "400": {
+              "description": "Invalid request",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "Invalid document IDs"
+                      }
                     }
                   }
                 }
               }
-            }
-          },
-          "401": {
-            "description": "Unauthorized - authentication required",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string",
-                      "example": "Authentication required"
+            },
+            "401": {
+              "description": "Unauthorized - authentication required",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "Authentication required"
+                      }
                     }
                   }
                 }
               }
-            }
-          },
-          "500": {
-            "description": "Server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string",
-                      "example": "Error resetting documents"
+            },
+            "500": {
+              "description": "Server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "Error resetting documents"
+                      }
                     }
                   }
                 }
@@ -2008,18 +2008,18 @@
                   }
                 }
               }
-            }
-          },
-          "500": {
-            "description": "Server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string",
-                      "example": "Error regenerating API key"
+            },
+            "500": {
+              "description": "Server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "Error regenerating API key"
+                      }
                     }
                   }
                 }
@@ -2710,7 +2710,7 @@
           "403": {
             "description": "Invalid or expired token",
             "content": {
-              "application/json": {
+                           "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
@@ -2915,7 +2915,7 @@
     "/settings": {
       "get": {
         "summary": "Application settings page",
-        "description": "Renders the application settings page where users can modify configuration\nafter initial setup.\n\nThis page allows administrators to update connections to Paperless-ngx, \nAI provider settings, processing parameters, feature toggles, and custom fields.\nThe interface provides validation for connection settings and displays the current\nconfiguration values.\n\nChanges made on this page require application restart to take full effect.\n",
+        "description": "Renders the application settings page where users can modify configuration\nafter initial setup.\n\nThis page allows administrators to update connections to Paperless-ngx, \nAI provider settings, processing parameters, and feature toggles.\nThe interface provides validation for connection settings and displays the current\nconfiguration values.\n\nChanges made on this page require application restart to take full effect.\n",
         "tags": [
           "Navigation",
           "Setup",
@@ -3133,6 +3133,11 @@
                     "type": "boolean",
                     "description": "Disable automatic document processing",
                     "example": false
+                  },
+                  "autoProcessingTimeWindow": {
+                    "type": "string",
+                    "description": "Time window for automatic processing in format HH:MM-HH:MM (e.g. 23:00-05:00)",
+                    "example": "23:00-05:00"
                   }
                 }
               }
@@ -3745,14 +3750,14 @@
                   }
                 }
               }
-            }
-          },
-          "500": {
-            "description": "Server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
+            },
+            "500": {
+              "description": "Server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
                 }
               }
             }
@@ -3835,18 +3840,18 @@
                   }
                 }
               }
-            }
-          },
-          "500": {
-            "description": "Server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string",
-                      "example": "Failed to fetch processing status"
+            },
+            "500": {
+              "description": "Server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "Failed to fetch processing status"
+                      }
                     }
                   }
                 }

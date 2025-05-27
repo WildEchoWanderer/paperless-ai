@@ -8,6 +8,7 @@ const AIServiceFactory = require('./services/aiServiceFactory');
 const documentModel = require('./models/document');
 const setupService = require('./services/setupService');
 const setupRoutes = require('./routes/setup');
+const timeWindowService = require('./services/timeWindowService');
 
 // Add environment variables for RAG service if not already set
 process.env.RAG_SERVICE_URL = process.env.RAG_SERVICE_URL || 'http://localhost:8000';
@@ -182,6 +183,14 @@ async function saveOpenApiSpec() {
 
 // Document processing functions
 async function processDocument(doc, existingTags, existingCorrespondentList, ownUserId) {
+  // Check if automatic processing is enabled or if we're in the processing window
+  const settings = await settingsService.getSettings();
+  if (settings.disableAutomaticProcessing === 'yes' && 
+      !timeWindowService.isWithinProcessingWindow(settings.autoProcessingTimeWindow)) {
+    console.log('[DEBUG] Automatic processing is disabled and not in processing window');
+    return null;
+  }
+
   const isProcessed = await documentModel.isDocumentProcessed(doc.id);
   if (isProcessed) return null;
   await documentModel.setProcessingStatus(doc.id, doc.title, 'processing');
@@ -560,7 +569,7 @@ async function startScanning() {
     console.log(`Starting initial scan at ${new Date().toISOString()}`);
     if(config.disableAutomaticProcessing != 'yes') {
       await scanInitial();
-  
+    
       cron.schedule(config.scanInterval, async () => {
         console.log(`Starting scheduled scan at ${new Date().toISOString()}`);
         await scanDocuments();
